@@ -1,6 +1,8 @@
 package com.leodecamargo.VeterinaryClinic.resources;
 
 import com.leodecamargo.VeterinaryClinic.entities.Owner;
+import com.leodecamargo.VeterinaryClinic.services.OwnerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,12 @@ import java.util.List;
 @RequestMapping(value = "/owners")
 public class OwnerResource {
 
+    @Autowired
+    private OwnerService service;
+
     @GetMapping
     public ResponseEntity<List<Owner>> findAll() {
-        List<Owner> list = new ArrayList<>();
-        list.add(new Owner(1L, "Bob", "St Clair Ave", "4670000000"));
-        list.add(new Owner(2L, "Ana", "Dundas St", "4670000001"));
+        List<Owner> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 }
