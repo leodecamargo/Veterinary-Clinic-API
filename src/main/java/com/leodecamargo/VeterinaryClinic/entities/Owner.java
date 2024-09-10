@@ -3,6 +3,7 @@ package com.leodecamargo.VeterinaryClinic.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,9 @@ public class Owner implements Serializable {
     private String name;
     private String address;
     private String phone;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Pet> pets; 
 
     public Owner() {
     }
